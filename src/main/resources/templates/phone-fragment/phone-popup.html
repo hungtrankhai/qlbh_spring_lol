@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<div class="popup hide__popup" th:fragment="phone-popup">
+    <div class="popup__content">
+        <div class="popup__close">
+<!--            <svg>-->
+<!--                <use xlink:href="./images/sprite.svgp#icon-cross"></use>-->
+                <i class="fa fa-times" aria-hidden="true"></i>
+<!--            </svg>-->
+        </div>
+        <div class="popup__left">
+            <div class="popup-img__container">
+                <img class="popup__img" th:src="@{/phone/images/products/iPhone/11promax64gb.jpg}" alt="popup">
+            </div>
+        </div>
+        <div class="popup__right">
+            <div class="right__content">
+                <h1>Giảm giá lên đến <span>40%</span> vào dịp 30/4 1/5 !</h1>
+                <p>Đăng ký để trở thành cộng tác viên của cửa hàng
+                </p>
+                <form action="#">
+                    <input type="email" placeholder="Nhập email của bạn..." class="popup__form">
+                    <a href="#">Đăng ký</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Giỏ hàng</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="shortcut icon" th:href="@{/phone/images/favicon.ico}" type="image/x-icon" />
+
+
+    <!-- Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" th:href="@{/phone/styles.css}" />
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #imgProduct {
+            max-width: 50%;
+            height: auto;
+        }
+
+        #quantity,#update-quantity,#checkout,#continue,#table-cart {
+            font-size: 15px;
+        }
+
+        #alert-success {
+            text-align: center;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<!-- header section start -->
+<!--<div class="header_section header_bg">-->
+<!--    <div th:replace="fragment/cycle-header :: cycle-header"></div>-->
+    <!-- banner section start -->
+<div th:replace="phone-fragment/top-header :: top-header"></div>
+    <!-- banner section start -->
+<!--    <div th:replace="fragment/cycle-cart-banner :: cycle-cart-banner"></div>-->
+    <!-- banner section end -->
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">GIỎ HÀNG</h1>
+        </div>
+    </section>
+    <h2 class="cycles_text" th:if="${cartItems.size == 0}">Giỏ hàng trống !</h2>
+    <div class="container col-sm-6">
+        <div class="alert alert-success" role="alert" id="alert-success">
+            Update thành công !!!
+        </div>
+        <h2 th:if="${errorMessage}" th:text="${errorMessage}"></h2>
+
+    </div>
+    <div class="container mb-4" th:if="${cartItems.size > 0}">
+        <div class="row">
+            <div class="col-12">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="table-cart">
+                        <thead>
+                        <tr>
+<!--                            <th scope="col" style="width: 0.00%"></th>-->
+                            <th scope="col" style="width: 20.00%"></th>
+                            <th scope="col" style="width: 20.00%">Tên sản phẩm</th>
+                            <th scope="col" style="width: 20.00%">Available</th>
+                            <th scope="col" class="text-center" style="width: 20.00%">Số lượng</th>
+                            <th scope="col" class="text-right" style="width: 20.00%">Giá bán</th>
+                            <th> </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="cartItem : ${cartItems}">
+<!--                            <td th:text="${cartItem.id}" id="cartId" style="display: none"></td>-->
+                            <td><img id="imgProduct" th:src="@{${cartItem.product.getPathImageProduct}}"></td>
+                            <td th:text="${cartItem.product.name}"></td>
+                            <td>In stock</td>
+                            <td>
+                                    <input id="quantity" class="form-control" type="number" title="Error Message" min="1" th:max="${cartItem.product.availableQuantity}" th:value="${cartItem.quantity}">
+<!--                                    <a class="btn btn-outline-success btn-block" id="update-quantity">Update</a>-->
+                                    <button class="btn btn-outline-success btn-block" id="update-quantity" th:onclick="'javascript:updateQuantity(' + ${cartItem.id} + ');'">Cập nhật</button>
+                            </td>
+                            <td class="text-right" th:text="${cartItem.product.price}"></td>
+                            <td class="text-right"><a th:href="@{/cart/delete-cart-item/{id}(id=${cartItem.id})}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a> </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Tổng giá</td>
+                            <td class="text-right" th:text="${subTotal}" id="subTotal">$</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>Phí vận chuyển</td>
+                            <td class="text-right" th:text="${shipping}" id="shipping">$</td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><strong>Tổng cộng</strong></td>
+                            <td class="text-right"><strong th:text="${total}" id="total"></strong>$</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="col mb-2">
+                <div class="row">
+                    <div class="col-sm-12  col-md-6">
+                        <th:block th:if="${cartItems.size > 0}">
+                            <a th:href="@{/}" class="btn btn-block btn-light" id="continue">Tiếp tục mua sắm</a>
+                        </th:block>
+                    </div>
+                    <div class="col-sm-12 col-md-6 text-right">
+                        <th:block th:if="${cartItems.size > 0}">
+                            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-lg btn-block btn-success text-uppercase" id="checkout">Xác nhận đơn hàng</button>
+                        </th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--th:href="@{/cart/contact#contact}"-->
+
+<!-- Button to Open the Modal -->
+<!-- The Modal -->
+<th:block th:if="${cartItems.size != 0}">
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Xác nhận đơn hàng</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body">
+                <form th:action="@{/pay}" th:object="${customerDTO}" method="post">
+                    <div class="form-group">
+                        <label>Họ</label>
+                        <input type="text" class="form-control" placeholder="First Name" th:name="firstName" th:field="*{firstName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Tên</label>
+                        <input type="text" class="form-control" placeholder="Last Name" th:name="lastName" th:field="*{lastName}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control email-bt" placeholder="Email" th:name="email" th:field="*{email}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="number" class="form-control" placeholder="Phone Number" th:name="phone" th:field="*{phoneNumber}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ</label>
+                        <input type="text" class="form-control" placeholder="Address" th:name="address" th:field="*{address}" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Lời nhắn</label>
+                        <textarea class="massage-bt form-control" placeholder="Message" rows="5" id="message" name="message" th:field="*{message}"></textarea>
+                    </div>
+                    <input type="submit" value="Payment with Paypal" class="btn btn-primary btn-user btn-block">
+                </form>
+            </div>
+
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</th:block>
+<!--<div th:replace="fragment/cycle-copyright :: cycle-copyright"></div>-->
+<!--<script th:src="@{/cycle/js/jquery.min.js}"></script>-->
+<!--<script th:src="@{/cycle/js/popper.min.js}"></script>-->
+<!--<script th:src="@{/cycle/js/bootstrap.bundle.min.js}"></script>-->
+<!--<script th:src="@{/cycle/js/jquery-3.0.0.min.js}"></script>-->
+<!--<script th:src="@{/cycle/js/plugin.js}"></script>-->
+<!--&lt;!&ndash; sidebar &ndash;&gt;-->
+<!--<script th:src="@{/cycle/js/jquery.mCustomScrollbar.concat.min.js}"></script>-->
+<!--<script th:src="@{/cycle/js/custom.js}"></script>-->
+<!--&lt;!&ndash; javascript &ndash;&gt;-->
+<!--<script th:src="@{/cycle/js/owl.carousel.js}"></script>-->
+<!--<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>-->
+<!-- Glide Carousel Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+<!-- Animate On Scroll -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!--<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+<!-- Custom JavaScript -->
+<script th:src="@{/phone/js/products.js}"></script>
+<script th:src="@{/phone/js/index.js}"></script>
+<script th:src="@{/phone/js/slider.js}"></script>
+<script>
+    $('#alert-success').hide();
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+
+    }
+
+    $("#main").click(function(){
+        $("#navbarSupportedContent").toggleClass("nav-normal")
+    });
+
+    $("#navbarSupportedContent").addClass('nav-normal');
+
+    function updateQuantity(cartId) {
+        var quantity = $('#quantity').val();
+        $.post("/cart/update-quantity/" + cartId + "/" + quantity, function(data, status){
+            if (status == "success") {
+                console.log(data.subTotal);
+                var subTotal = data.subTotal;
+                var shipPrice = data.shipPrice;
+                var total = subTotal + shipPrice;
+                $('#quantity').val(quantity);
+                $('#subTotal').html(subTotal);
+                $('#shipping').html(shipPrice);
+                $('#total').html(total);
+                $('#alert-success').show();
+                setTimeout(function() { $('#alert-success').hide(); }, 2000);
+            }
+        });
+    }
+</script>
+</body>
+</html>

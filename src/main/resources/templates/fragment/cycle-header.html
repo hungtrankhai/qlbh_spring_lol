@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="cycle-header">
+    <a href="index.html" class="logo"><img th:src="@{/cycle/images/logo.png}"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="cycle.html">Our Cycle</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="shop.html">Shop</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="news.html">News</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="contact.html">Contact Us</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <div class="login_menu">
+                <ul>
+<!--                    <li><a href="#">Login</a></li>-->
+                    <li><a th:href="@{/cart/detail}"><img th:src="@{/cycle/images/trolly-icon.png}"></a></li>
+                    <li><a href="#"><img th:src="@{/cycle/images/search-icon.png}"></a></li>
+                </ul>
+            </div>
+            <div></div>
+        </form>
+    </div>
+    <div id="main">
+        <span style="font-size:36px;cursor:pointer; color: #fff" onclick="openNav()"><img th:src="@{/cycle/images/toggle-icon.png}" style="height: 30px;"></span>
+    </div>
+</nav>

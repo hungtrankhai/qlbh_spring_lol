@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<header id="header" class="header" th:fragment="top-header">
+    <div class="navigation">
+        <div class="container">
+            <nav class="nav">
+                <div class="nav__hamburger">
+                    <svg>
+                        <use xlink:href="./images/sprite.svg#icon-menu"></use>
+                    </svg>
+                </div>
+
+                <div class="nav__logo">
+                    <a href="/" class="scroll-link">
+                        IPHONE
+                    </a>
+                </div>
+
+                <div class="nav__menu">
+                    <div class="menu__top">
+                        <span class="nav__category">IPHONE</span>
+                        <a href="#" class="close__toggle">
+                            <svg>
+                                <use xlink:href="./images/sprite.svg#icon-cross"></use>
+                            </svg>
+                        </a>
+                    </div>
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#header" class="nav__link scroll-link">Trang chủ</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#category" class="nav__link scroll-link">Sản phẩm</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#news" class="nav__link scroll-link">Tạp chí</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact" class="nav__link scroll-link">Liên hệ</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="nav__icons">
+                    <a href="#" class="icon__item">
+                        <i class="fa fa-user-circle" aria-hidden="true"></i>
+                    </a>
+
+                    <a href="#" class="icon__item">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </a>
+
+                    <a th:href="@{/cart/detail}" class="icon__item">
+                        <i class="fa fa-shopping-basket" aria-hidden="true"></i>
+                        <span id="cart__total" th:text="${numberOfItem}"></span>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>

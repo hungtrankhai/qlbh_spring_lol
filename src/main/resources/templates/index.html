@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;700&display=swap" rel="stylesheet" />
+
+    <link rel="shortcut icon" th:href="@{/phone/images/favicon.ico}" type="image/x-icon" />
+
+
+    <!-- Carousel -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.core.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/css/glide.theme.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Custom StyleSheet -->
+    <link rel="stylesheet" th:href="@{/phone/styles.css}" />
+
+    <title>Iphone Shop</title>
+</head>
+
+<body>
+
+<!-- Header -->
+<!--Header lay trong phone-fragment bang cach replace lai cai header  -->
+<!--<div th:replace="fragment/cycle-copyright :: cycle-copyright"></div>-->
+<div th:replace="phone-fragment/header :: phone-header"></div>
+<!-- End Header -->
+
+<!-- Main -->
+<!--<div th:replace="fragment/cycle-copyright :: cycle-copyright"></div>-->
+<main id="main">
+    <div class="container">
+        <!-- Collection -->
+        <div th:replace="phone-fragment/collection :: phone-collection"></div>
+        <!-- End Collection -->
+
+        <!-- Latest Products -->
+        <div th:replace="phone-fragment/latest :: phone-latest"></div>
+        <!-- End Latest Products -->
+
+        <!-- all/trend/special Products -->
+        <div th:replace="phone-fragment/select-button :: phone-select-button"></div>
+
+        <!-- end all/trend/special Products -->
+
+        <!-- Facility Section -->
+        <div th:replace="phone-fragment/facility :: phone-facility"></div>
+        <!-- end Facility Section -->
+
+    </div>
+    <!-- Testimonial Section -->
+<!--    <div th:replace="phone-fragment/testimonial :: phone-testimonial"></div>-->
+
+    <!-- end Testimonial Section -->
+    <!--phone New Section  -->
+    <div th:replace="phone-fragment/phone-news :: phone-news"></div>
+
+    <!--end phone New Section  -->
+
+    <!-- subscribe -->
+    <div th:replace="phone-fragment/subscribe :: phone-subscribe"></div>
+    <!-- end subscribe -->
+
+</main>
+
+<!-- End Main -->
+
+<!-- Footer -->
+<div th:replace="phone-fragment/footer :: phone-footer"></div>
+<!-- End Footer -->
+
+<!-- PopUp -->
+<div th:replace="phone-fragment/phone-popup :: phone-popup"></div>
+<!--end PopUp -->
+<!-- Go To -->
+
+<a href="#header" class="goto-top scroll-link">
+    <svg>
+        <use xlink:href="./images/sprite.svg#icon-arrow-up">^</use>
+    </svg>
+</a>
+
+
+<!-- Glide Carousel Script -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Glide.js/3.4.1/glide.min.js"></script>
+<!-- Animate On Scroll -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- Custom JavaScript -->
+<script th:src="@{/phone/js/products.js}"></script>
+<script th:src="@{/phone/js/index.js}"></script>
+<script th:src="@{/phone/js/slider.js}"></script>
+
+
+</body>
+
+</html>

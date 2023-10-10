@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+<head>
+    <!-- basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- mobile metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <!-- site metas -->
+    <title>Cycle Shop</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- bootstrap css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/cycle/css/bootstrap.min.css}">
+    <!-- style css -->
+    <link rel="stylesheet" type="text/css" th:href="@{/cycle/css/style.css}">
+    <!-- Responsive-->
+    <link rel="stylesheet" th:href="@{/cycle/css/responsive.css}">
+    <!-- fevicon -->
+    <link rel="icon" th:href="@{/cycle/images/fevicon.png}" type="image/gif" />
+    <!-- Scrollbar Custom CSS -->
+    <link rel="stylesheet" th:href="@{/cycle/css/jquery.mCustomScrollbar.min.css}">
+    <!-- Tweaks for older IEs-->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+    <!-- owl stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700|Raleway:400,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/cycle/css/owl.carousel.min.css}">
+    <link rel="stylesoeet" th:href="@{/cycle/css/owl.theme.default.min.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" media="screen">
+</head>
+<body>
+<!-- header section start -->
+<div class="header_section header_bg">
+    <div th:replace="fragment/cycle-header :: cycle-header"></div>
+    <!-- banner section start -->
+    <div th:replace="fragment/cycle-banner :: cycle-banner"></div>
+    <!-- banner section end -->
+</div>
+<div th:replace="fragment/cycle-callback :: cycle-callback"></div>
+<!-- contact section end -->
+<!-- footer section start -->
+<div class="footer_section layout_padding">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 padding_0">
+                <div class="map_main">
+                    <div class="map-responsive">
+                        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-12">
+                <div class="call_text"><a href="#"><img th:src="@{/cycle/images/map-icon.png}"><span class="padding_left_0">Page when looking at its layou</span></a></div>
+                <div class="call_text"><a href="#"><img th:src="@{/cycle/images/call-icon.png}"><span class="padding_left_0">Call Now  +01 123467890</span></a></div>
+                <div class="call_text"><a href="#"><img th:src="@{/cycle/images/mail-icon.png}"><span class="padding_left_0">demo@gmail.com</span></a></div>
+                <div class="social_icon">
+                    <ul>
+                        <li><a href="#"><img th:src="@{/cycle/images/fb-icon1.png}"></a></li>
+                        <li><a href="#"><img th:src="@{/cycle/images/twitter-icon.png}"></a></li>
+                        <li><a href="#"><img th:src="@{/cycle/images/linkedin-icon.png}"></a></li>
+                        <li><a href="#"><img th:src="@{/cycle/images/instagram-icon.png}"></a></li>
+                    </ul>
+                </div>
+                <input type="text" class="email_text" placeholder="Enter Your Email" name="Enter Your Email">
+                <div class="subscribe_bt"><a href="#">Subscribe</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- footer section end -->
+<!-- copyright section start -->
+<div th:replace="fragment/cycle-copyright :: cycle-copyright"></div>
+<!-- copyright section end -->
+<!-- Javascript files-->
+<script th:src="@{/cycle/js/jquery.min.js}"></script>
+<script th:src="@{/cycle/js/popper.min.js}"></script>
+<script th:src="@{/cycle/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/cycle/js/jquery-3.0.0.min.js}"></script>
+<script th:src="@{/cycle/js/plugin.js}"></script>
+<!-- sidebar -->
+<script th:src="@{/cycle/js/jquery.mCustomScrollbar.concat.min.js}"></script>
+<script th:src="@{/cycle/js/custom.js}"></script>
+<!-- javascript -->
+<script th:src="@{/cycle/js/owl.carousel.js}"></script>
+<script src="https:cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+<script>
+    function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+        document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+        document.getElementById("main").style.marginLeft= "0";
+
+    }
+
+    $("#main").click(function(){
+        $("#navbarSupportedContent").toggleClass("nav-normal")
+    })
+</script>
+</body>
+</html>
